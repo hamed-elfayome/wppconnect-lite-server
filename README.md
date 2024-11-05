@@ -8,7 +8,7 @@ Lite WhatsApp API server for WppConnect, built with Node.js and Express.
 ## Features
 
 - WhatsApp session management
-- Message sending and receiving
+- Multi-type message support (Receive various message types, send text messages only)
 - Media handling
 - Webhook integrations
 - Rate limiting
