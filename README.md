@@ -209,9 +209,7 @@ Receives media files from WhatsApp messages.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the [MIT License](./LICENSE).
 
-This project also uses the following open-source libraries:
-
-- `@wppconnect-team/wppconnect` - Licensed under Apache License 2.0.
-
+### Third-Party Licenses
+- The `@wppconnect-team/wppconnect` package is used under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
