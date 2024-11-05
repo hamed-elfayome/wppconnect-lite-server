@@ -26,7 +26,7 @@ Lite WhatsApp API server for WppConnect, built with Node.js and Express.
 
 1. Clone the repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/hamed-elfayome/wppconnect-lite-server.git
 cd wppconnect-lite-server
 ```
 
