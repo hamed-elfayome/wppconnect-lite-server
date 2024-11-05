@@ -1,6 +1,6 @@
 # WhatsApp API Server
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Release](https://img.shields.io/github/v/release/hamed-elfayome/wppconnect-lite-server?label=Release&style=round-square)
+![Release](https://img.shields.io/github/release/hamed-elfayome/wppconnect-lite-server.svg)
 
 
 Lite WhatsApp API server for WppConnect, built with Node.js and Express.
@@ -39,6 +39,9 @@ npm install
 ```bash
 cp .env.example .env
 ```
+In the ```.env``` file, set the following required variables:
+- ```WEB_HOOK_URL``` - URL where webhook events will be sent.
+- ```API_SECRET_KEY``` - API key for authenticating requests.
 
 4. Start the server
 ```bash
@@ -198,7 +201,7 @@ Receives incoming WhatsApp messages.
 POST /media
 
 {
-  file base64
+  //file_base64
 }
 ```
 
