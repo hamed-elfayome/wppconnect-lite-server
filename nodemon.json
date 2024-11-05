@@ -1,0 +1,6 @@
+{
+  "watch": ["config", "middleware", "routes", "services", "utils", ".env", "app.js"],
+  "ignore": ["tokens", "storage"],
+  "exec": "node app.js",
+  "ext": "js,json"
+}

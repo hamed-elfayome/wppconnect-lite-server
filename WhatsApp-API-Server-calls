@@ -1,0 +1,388 @@
+{
+  "info": {
+    "name": "WhatsApp API Server",
+    "description": "A professional WhatsApp API server for sending and receiving messages",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "api_key",
+      "value": "your-secret-key-here",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "WhatsApp Endpoints",
+      "description": "Main API endpoints for WhatsApp functionality",
+      "item": [
+        {
+          "name": "Initialize WhatsApp",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "{{api_key}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/whatsapp/initialize",
+              "host": ["{{base_url}}"],
+              "path": ["api", "whatsapp", "initialize"]
+            },
+            "description": "Initializes the WhatsApp client and starts the QR code generation process"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/whatsapp/initialize"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": {
+                "success": true,
+                "message": "Initialization started"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Session Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "{{api_key}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/whatsapp/session-status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "whatsapp", "session-status"]
+            },
+            "description": "Gets the current status of the WhatsApp session"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/whatsapp/session-status"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": {
+                "success": true,
+                "status": "connected",
+                "message": "Session is active and connected",
+                "qrCode": null
+              }
+            }
+          ]
+        },
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "{{api_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"number\": \"1234567890\",\n    \"message\": \"Hello from WhatsApp API!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/whatsapp/send-message",
+              "host": ["{{base_url}}"],
+              "path": ["api", "whatsapp", "send-message"]
+            },
+            "description": "Sends a message to a specified WhatsApp number"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/whatsapp/send-message"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": {
+                "success": true,
+                "message": "Message sent successfully to 1234567890",
+                "messageId": "ABCD1234"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Disconnect Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "{{api_key}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/whatsapp/disconnect",
+              "host": ["{{base_url}}"],
+              "path": ["api", "whatsapp", "disconnect"]
+            },
+            "description": "Disconnects the current WhatsApp session"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/whatsapp/disconnect"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": {
+                "success": true,
+                "message": "Session disconnected successfully",
+                "status": "disconnected",
+                "qrCode": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Webhooks (Backend Implementation)",
+      "description": "Webhook endpoints that need to be implemented on the Laravel backend",
+      "item": [
+        {
+          "name": "Status Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"connected\"\n}"
+            },
+            "url": {
+              "raw": "{{laravel_url}}/webhook/status",
+              "host": ["{{laravel_url}}"],
+              "path": ["webhook", "status"]
+            },
+            "description": "Receives WhatsApp connection status updates"
+          },
+          "response": [
+            {
+              "name": "Expected Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{laravel_url}}/webhook/status"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": {
+                "success": true,
+                "message": "Status received"
+              }
+            }
+          ]
+        },
+        {
+          "name": "QR Code Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"qrCode\": \"base64_encoded_qr_code_data\"\n}"
+            },
+            "url": {
+              "raw": "{{laravel_url}}/webhook/qr",
+              "host": ["{{laravel_url}}"],
+              "path": ["webhook", "qr"]
+            },
+            "description": "Receives QR code data for WhatsApp authentication"
+          },
+          "response": [
+            {
+              "name": "Expected Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{laravel_url}}/webhook/qr"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": {
+                "success": true,
+                "message": "QR code received"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Incoming Message Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"from\": \"1234567890@c.us\",\n    \"sender\": {\n        \"id\": \"1234567890@c.us\",\n        \"name\": \"John Doe\",\n        \"pushname\": \"John\"\n    },\n    \"body\": \"Hello!\",\n    \"type\": \"chat\",\n    \"timestamp\": 1683000000,\n    \"isGroupMsg\": false,\n    \"messageId\": \"ABCD1234\",\n    \"quotedMsg\": null,\n    \"mentionedJidList\": []\n}"
+            },
+            "url": {
+              "raw": "{{laravel_url}}/incoming-message",
+              "host": ["{{laravel_url}}"],
+              "path": ["incoming-message"]
+            },
+            "description": "Receives incoming WhatsApp messages"
+          },
+          "response": [
+            {
+              "name": "Expected Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{laravel_url}}/incoming-message"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": {
+                "success": true,
+                "message": "Message received"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Media Upload Webhook",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/file"
+                },
+                {
+                  "key": "mediaInfo",
+                  "value": "{\n    \"type\": \"image\",\n    \"mimetype\": \"image/jpeg\",\n    \"filename\": \"ABCD1234\",\n    \"caption\": \"Image caption\",\n    \"size\": 12345,\n    \"width\": 800,\n    \"height\": 600\n}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{laravel_url}}/media",
+              "host": ["{{laravel_url}}"],
+              "path": ["media"]
+            },
+            "description": "Receives media files from WhatsApp messages"
+          },
+          "response": [
+            {
+              "name": "Expected Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{laravel_url}}/media"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "body": {
+                "success": true,
+                "message": "Media received"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

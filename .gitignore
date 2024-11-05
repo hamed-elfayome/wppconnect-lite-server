@@ -1,0 +1,11 @@
+node_modules/
+.env
+logs/*
+tokens/*
+!logs/.gitkeep
+storage/media/*
+!storage/media/.gitkeep
+storage/sessions/*
+!storage/sessions/.gitkeep
+.DS_Store
+.idea
